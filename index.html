@@ -3,13 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Horoscope</title>
+    <title>Astrologic</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
+<header class="header--main">
+    <!-- <div class="logo">
+        <img class="tedgeypic" src="pictures/tedgey.png">
+    </div> -->
+    <ul class="apps-list">
+        <li class="nav-list" id="Home">Home</li>
+        <li class="nav-list" id="Projects">About</li>
+        <li class="nav-list" id="Contact">Contact</li>
+    </ul>
+</header>
 <body>
+    <div class="spaceImage">
+        <img src="pictures/purpspace.jpg" id="purpspace">
+    </div>
     <div class="search">
-        <input type="text" class="searchTerm" placeholder="Search for a player">
-        </input>
+        <input type="text" class="searchTerm" placeholder="Search for a player"></input>
     </div>
     <div class="wrapper">
         <h1>Horoscope Test</h1>
@@ -25,7 +37,10 @@
     </div>
     <script src="./scripts/main.js"></script>
     <script>
-        loadHoroscope();
-</script>
+        getPlayerSign();
+    </script>
 </body>
+<footer class="footer--main">
+    Made by Jack, Tedge, and Scooter
+</footer>
 </html>
