@@ -1,7 +1,8 @@
 function takeInput(){
-    let playerName = prompt("Enter an NBA player's name");
-    playerName = playerName.trim();
-    playerName = playerName.replace(" ", "_");
+    let playerName = 'Trae Young';
+    // let playerName = "prompt("Enter an NBA player's name")";
+    // playerName = playerName.trim();
+    // playerName = playerName.replace(" ", "_");
     console.log(`player: ${playerName}`);
     return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
 }
@@ -36,7 +37,6 @@ function get(url) {
     });
 }
 
-const playerInfoDiv = document.getElementById("player-info")
 
 function getPlayerData(data) {
     //player name
@@ -86,7 +86,6 @@ function findBirthday(data) {
     return birthday
 }
 
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
 function getWiki(url) {
     return fetch(proxyUrl + url)
@@ -217,26 +216,14 @@ function whatsYourSign(month, day) {
         else {
             return "capricorn"}
         }
+    else {
+        window.alert("Player not found, please try again");
+        throw ''
+        }
 }
 
 // console.log("input sun sign " + inputSunSign);
 // let inputSunSign = (whatsYourSign(1,1));
-
-function getPlayerSign(){
-    let loader = document.getElementById('loader');
-        loader.style.display = 'block';
-    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
-    .then((data) => {
-        var birthday = findBirthday(data);
-        var parsedBirthday = parseBirthday(birthday);
-        var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
-        let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
-        console.log("api url:" + apiUrl);
-    else {
-        window.alert("Player not found, please try again");
-        throw ''
-    }
-};
 
 function addDate (object) {
     const horoDate = document.getElementById('date');
@@ -274,7 +261,8 @@ function addSunsign(object) {
 function getPlayerSign(){
     let wikiUrl = takeInput();
     let loader = document.getElementById('loader');
-    loader.style.display = 'block';
+        loader.style.display = 'block';
+        console.log("this is loader" + loader.style.display)
     getWiki(wikiUrl)
     .then((data) => {
         getPlayerData(data);
