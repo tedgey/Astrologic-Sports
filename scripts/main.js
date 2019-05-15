@@ -1,33 +1,10 @@
 
-function addDate (object) {
-    const horoDate = document.getElementById('date');
-    horoDate.innerHTML = object;
-}
-
-function addHoroscope(object) {
-    const horo = document.getElementById('horoscope');
-    horo.innerHTML = object;
-}
-
-function addIntensity(object) {
-    const intensityNumber = document.getElementById('intensity');
-    intensityNumber.innerHTML = object;
-}
-
-function addKeywords(object) {
-    const horoKeywords = document.getElementById('keywords');
-    horoKeywords.innerHTML = `Keywords are: ${object}`;
-}
-
-function addMood(object) {
-    const horoMood = document.getElementById('mood');
-    console.log(`mood: ${object}`)
-    horoMood.innerHTML = object;
-}
-
-function addSunsign(object) {
-    const horoSunsign = document.getElementById('sunsign');
-    horoSunsign.innerHTML = object;
+function takeInput(){
+    let playerName = prompt("Enter an NBA player's name");
+    playerName = playerName.trim();
+    playerName = playerName.replace(" ", "_");
+    console.log(`player: ${playerName}`);
+    return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
 }
 
 const proxyUrl = "https://cors-anywhere.herokuapp.com/";
@@ -82,6 +59,7 @@ function parseBirthday(birthday){
     else if (checkStr.includes(birthday[pipeInd+2]) === true){ //double digit day
         var day = birthday.substring(pipeInd+1, pipeInd+3);
     }
+    console.log(`month: ${month} day: ${day}`);
     return [parseInt(month), parseInt(day)];
 }
 
@@ -159,19 +137,54 @@ function whatsYourSign(month, day) {
         else {
             return "capricorn"}
         }
+    else {
+        window.alert("Player not found, please try again");
+        throw ''
+    }
+}
+
+function addDate (object) {
+    const horoDate = document.getElementById('date');
+    horoDate.innerHTML = object;
+}
+
+function addHoroscope(object) {
+    const horo = document.getElementById('horoscope');
+    horo.innerHTML = object;
+}
+
+function addIntensity(object) {
+    const intensityNumber = document.getElementById('intensity');
+    intensityNumber.innerHTML = object;
+}
+
+function addKeywords(object) {
+    const horoKeywords = document.getElementById('keywords');
+    horoKeywords.innerHTML = `Keywords are: ${object}`;
+}
+
+function addMood(object) {
+    const horoMood = document.getElementById('mood');
+    horoMood.innerHTML = object;
+}
+
+function addSunsign(object) {
+    const horoSunsign = document.getElementById('sunsign');
+    horoSunsign.innerHTML = object;
 }
 
 // console.log("input sun sign " + inputSunSign);
 // let inputSunSign = (whatsYourSign(1,1));
 
 function getPlayerSign(){
-    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
+    let wikiUrl = takeInput();
+    getWiki(wikiUrl)
     .then((data) => {
         var birthday = findBirthday(data);
         var parsedBirthday = parseBirthday(birthday);
         var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
+        console.log(`player's sign: ${playerSign}`);
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
-        console.log("api url:" + apiUrl);
         get(apiUrl)
         .then((response) => {
             addDate(response.date);
