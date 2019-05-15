@@ -29,6 +29,54 @@ function addSunsign(object) {
     const horoSunsign = document.getElementById('sunsign');
     horoSunsign.innerHTML = object;
 }
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+function getWiki(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
+const playerInfoDiv = document.getElementById("player-info")
+
+function findBirthday(data) {
+    birthdayInd = data.indexOf("and age|");
+    let bdayBegin = birthdayInd+13
+    let bdayEnd = birthdayInd+18
+    birthday = data.substring(bdayBegin, bdayEnd);
+    return birthday
+}
+
+function parseBirthday(birthday){
+    let checkStr = "0123456789"
+    let pipeInd = birthday.indexOf("|");
+    let month = birthday.substring(0,pipeInd); //everything left of the pipe is the month
+    if (checkStr.includes(birthday[pipeInd+2]) === false){ //single digit day
+        var day = birthday.substring(pipeInd+1, pipeInd+2);
+    }
+    else if (checkStr.includes(birthday[pipeInd+2]) === true){ //double digit day
+        var day = birthday.substring(pipeInd+1, pipeInd+3);
+    }
+    return [parseInt(month), parseInt(day)];
+}
+
+function getPlayerSign(){
+    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
+    .then((data) => {
+        var birthday = findBirthday(data);
+        var parsedBirthday = parseBirthday(birthday);
+        var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
+        return playerSign;
+    })
+
+}
+
 
 
 function whatsYourSign(month, day) {
@@ -104,22 +152,19 @@ function whatsYourSign(month, day) {
         else {
             return "capricorn"}
         }
-console.log(whatsYourSign(1, 1));
+
 }
+// getPlayerSign();
+// var inputSunSign = getPlayerSign(); 
+// console.log("input sun sign " + inputSunSign);
+// let inputSunSign = (whatsYourSign(1,1));
 
-// let inputSunSign = 'leo'
 
-let inputSunSign = (whatsYourSign(1,1));
-
-
-
-// Use the below URL to make a fetch request, 
-// and then run the above functions to populate the page
-// const apiURL = "https://theastrologer-api.herokuapp.com/api/horoscope/aries/tomorrow";
-const apiURL = `https://theastrologer-api.herokuapp.com/api/horoscope/${inputSunSign}/tomorrow`;
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-function get(url) {
-    return fetch(proxyUrl + url)
+// const apiUrl = "https://theastrologer-api.herokuapp.com/api/horoscope/aries/tomorrow";
+const proxyUrl2 = "https://cors-anywhere.herokuapp.com/";
+const apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+function get(Url) {
+    return fetch(proxyUrl2 + Url)
     .then(function(response) {
         return response.json()
     })
@@ -132,7 +177,9 @@ function get(url) {
 }
 
 function loadHoroscope () {
-    get(apiURL)
+    getPlayerSign();
+    console.log("look atme: " + getPlayerSign());
+    get(apiUrl)
     .then(function(response){
         addDate(response.date);
         addHoroscope(response.horoscope);
