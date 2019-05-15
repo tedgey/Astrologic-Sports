@@ -1,42 +1,11 @@
 function takeInput(){
-    let playerName = prompt("Enter an NBA player's name");
+    let playerName = document.getElementById('search');
+    // let playerName = "prompt("Enter an NBA player's name")";
     playerName = playerName.trim();
     playerName = playerName.replace(" ", "_");
     console.log(`player: ${playerName}`);
     return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
 }
-
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-
-function getWiki(url) {
-    return fetch(proxyUrl + url)
-    .then(function(response) {
-        return response.text();
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
-// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
-
-function get(url) {
-    return fetch(proxyUrl + url)
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
-const playerInfoDiv = document.getElementById("player-info")
 
 function getPlayerData(data) {
     //player name
@@ -77,6 +46,38 @@ function getPlayerData(data) {
     return playerObj
 }
 
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
+function getWiki(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
+// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+
+function get(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
+const playerInfoDiv = document.getElementById("player-info")
+
 function findBirthday(data) {
     //takes data from wiki api and parses it to find the (unformatted) birthdate
     birthdayInd = data.indexOf("and age|");
@@ -97,6 +98,7 @@ function parseBirthday(birthday){
     else if (checkStr.includes(birthday[pipeInd+2]) === true){ //double digit day
         var day = birthday.substring(pipeInd+1, pipeInd+3);
     }
+
     console.log(`month: ${month} day: ${day}`);
     return [parseInt(month), parseInt(day)];
 }
@@ -178,44 +180,43 @@ function whatsYourSign(month, day) {
     else {
         window.alert("Player not found, please try again");
         throw ''
-    }
+        }
 }
 
 function addDate (object) {
     const horoDate = document.getElementById('date');
     horoDate.innerHTML = `Horoscope Date: ${object}`;
-}
+};
 
 function addHoroscope(object) {
     const horo = document.getElementById('horoscope');
     horo.innerHTML = `Horoscope: ${object}`;
-}
+};
 
 function addIntensity(object) {
     const intensityNumber = document.getElementById('intensity');
     intensityNumber.innerHTML = `Intensity: ${object}`;
-}
+};
 
 function addKeywords(object) {
     const horoKeywords = document.getElementById('keywords');
     horoKeywords.innerHTML = `Keywords: ${object}`;
-}
+};
 
 function addMood(object) {
     const horoMood = document.getElementById('mood');
     horoMood.innerHTML = `Mood: ${object}`;
-}
+};
 
 function addSunsign(object) {
     const horoSunsign = document.getElementById('sunsign');
     horoSunsign.innerHTML = `Sign: ${object}`;
-}
-
-// console.log("input sun sign " + inputSunSign);
-// let inputSunSign = (whatsYourSign(1,1));
+};
 
 function getPlayerSign(){
     let wikiUrl = takeInput();
+    let loader = document.getElementById('loader');
+        loader.style.display = 'block';
     getWiki(wikiUrl)
     .then((data) => {
         getPlayerData(data);
@@ -232,6 +233,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
+            loader.style.display = 'none';
         })
     })
 }
