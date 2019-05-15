@@ -29,7 +29,9 @@ function addSunsign(object) {
     const horoSunsign = document.getElementById('sunsign');
     horoSunsign.innerHTML = object;
 }
+
 const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
 function getWiki(url) {
     return fetch(proxyUrl + url)
     .then(function(response) {
@@ -43,9 +45,25 @@ function getWiki(url) {
     });
 }
 
+// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+
+function get(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
 const playerInfoDiv = document.getElementById("player-info")
 
 function findBirthday(data) {
+    //takes data from wiki api and parses it to find the (unformatted) birthdate
     birthdayInd = data.indexOf("and age|");
     let bdayBegin = birthdayInd+13
     let bdayEnd = birthdayInd+18
@@ -54,6 +72,7 @@ function findBirthday(data) {
 }
 
 function parseBirthday(birthday){
+    //takes unformatted birthday and returns array of [MM,DD]
     let checkStr = "0123456789"
     let pipeInd = birthday.indexOf("|");
     let month = birthday.substring(0,pipeInd); //everything left of the pipe is the month
@@ -66,20 +85,8 @@ function parseBirthday(birthday){
     return [parseInt(month), parseInt(day)];
 }
 
-function getPlayerSign(){
-    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
-    .then((data) => {
-        var birthday = findBirthday(data);
-        var parsedBirthday = parseBirthday(birthday);
-        var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
-        return playerSign;
-    })
-
-}
-
-
-
 function whatsYourSign(month, day) {
+    //takes month and day and finds player's sun sign
     if (month === 1) {
         if (day < 20) {
             return "capricorn"}
@@ -152,40 +159,27 @@ function whatsYourSign(month, day) {
         else {
             return "capricorn"}
         }
-
 }
-// getPlayerSign();
-// var inputSunSign = getPlayerSign(); 
+
 // console.log("input sun sign " + inputSunSign);
 // let inputSunSign = (whatsYourSign(1,1));
 
-
-// const apiUrl = "https://theastrologer-api.herokuapp.com/api/horoscope/aries/tomorrow";
-const proxyUrl2 = "https://cors-anywhere.herokuapp.com/";
-const apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
-function get(Url) {
-    return fetch(proxyUrl2 + Url)
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
-function loadHoroscope () {
-    getPlayerSign();
-    console.log("look atme: " + getPlayerSign());
-    get(apiUrl)
-    .then(function(response){
-        addDate(response.date);
-        addHoroscope(response.horoscope);
-        addIntensity(response.meta.intensity);
-        addSunsign(response.sunsign);
-        addMood(response.meta.mood);
-        addKeywords(response.meta.keywords);
+function getPlayerSign(){
+    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
+    .then((data) => {
+        var birthday = findBirthday(data);
+        var parsedBirthday = parseBirthday(birthday);
+        var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
+        let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+        console.log("api url:" + apiUrl);
+        get(apiUrl)
+        .then((response) => {
+            addDate(response.date);
+            addHoroscope(response.horoscope);
+            addIntensity(response.meta.intensity);
+            addSunsign(response.sunsign);
+            addMood(response.meta.mood);
+            addKeywords(response.meta.keywords);
+        })
     })
 }
