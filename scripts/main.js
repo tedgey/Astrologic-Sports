@@ -30,8 +30,63 @@ function addSunsign(object) {
     horoSunsign.innerHTML = object;
 }
 
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
+function getWiki(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.text();
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
+// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+
+function get(url) {
+    return fetch(proxyUrl + url)
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        return data;
+    })
+    .catch(function(error) {
+        return error;
+    });
+}
+
+const playerInfoDiv = document.getElementById("player-info")
+
+function findBirthday(data) {
+    //takes data from wiki api and parses it to find the (unformatted) birthdate
+    birthdayInd = data.indexOf("and age|");
+    let bdayBegin = birthdayInd+13
+    let bdayEnd = birthdayInd+18
+    birthday = data.substring(bdayBegin, bdayEnd);
+    return birthday
+}
+
+function parseBirthday(birthday){
+    //takes unformatted birthday and returns array of [MM,DD]
+    let checkStr = "0123456789"
+    let pipeInd = birthday.indexOf("|");
+    let month = birthday.substring(0,pipeInd); //everything left of the pipe is the month
+    if (checkStr.includes(birthday[pipeInd+2]) === false){ //single digit day
+        var day = birthday.substring(pipeInd+1, pipeInd+2);
+    }
+    else if (checkStr.includes(birthday[pipeInd+2]) === true){ //double digit day
+        var day = birthday.substring(pipeInd+1, pipeInd+3);
+    }
+    return [parseInt(month), parseInt(day)];
+}
 
 function whatsYourSign(month, day) {
+    //takes month and day and finds player's sun sign
     if (month === 1) {
         if (day < 20) {
             return "capricorn"}
@@ -104,41 +159,30 @@ function whatsYourSign(month, day) {
         else {
             return "capricorn"}
         }
-console.log(whatsYourSign(1, 1));
 }
 
-// let inputSunSign = 'leo'
+// console.log("input sun sign " + inputSunSign);
+// let inputSunSign = (whatsYourSign(1,1));
 
-let inputSunSign = (whatsYourSign(1,1));
-
-
-
-// Use the below URL to make a fetch request, 
-// and then run the above functions to populate the page
-// const apiURL = "https://theastrologer-api.herokuapp.com/api/horoscope/aries/tomorrow";
-const apiURL = `https://theastrologer-api.herokuapp.com/api/horoscope/${inputSunSign}/tomorrow`;
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-function get(url) {
-    return fetch(proxyUrl + url)
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
-function loadHoroscope () {
-    get(apiURL)
-    .then(function(response){
-        addDate(response.date);
-        addHoroscope(response.horoscope);
-        addIntensity(response.meta.intensity);
-        addSunsign(response.sunsign);
-        addMood(response.meta.mood);
-        addKeywords(response.meta.keywords);
+function getPlayerSign(){
+    let loader = document.getElementById('loader');
+        loader.style.display = 'block';
+    getWiki('http://en.wikipedia.org/w/api.php?action=parse&page=Al_Horford&format=xml&prop=wikitext')
+    .then((data) => {
+        var birthday = findBirthday(data);
+        var parsedBirthday = parseBirthday(birthday);
+        var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
+        let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+        console.log("api url:" + apiUrl);
+        get(apiUrl)
+        .then((response) => {
+            addDate(response.date);
+            addHoroscope(response.horoscope);
+            addIntensity(response.meta.intensity);
+            addSunsign(response.sunsign);
+            addMood(response.meta.mood);
+            addKeywords(response.meta.keywords);
+            loader.style.display = 'none';
+        })
     })
 }
