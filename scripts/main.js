@@ -1,4 +1,3 @@
-
 function takeInput(){
     let playerName = prompt("Enter an NBA player's name");
     playerName = playerName.trim();
@@ -38,6 +37,45 @@ function get(url) {
 }
 
 const playerInfoDiv = document.getElementById("player-info")
+
+function getPlayerData(data) {
+    //player name
+    let nameInd = data.indexOf("name = ");
+    let nameStart = nameInd + 7;
+    let nameEnd = data.indexOf("|", nameStart);
+    let playerName = data.substring(nameStart, nameEnd);
+    //picture url
+    let picInd = data.indexOf("image = ");
+    let picStart = picInd + 8;
+    let picEnd = data.indexOf("|", picStart);
+    let picName = data.substring(picStart, picEnd);
+    picName = picName.replace(/ /g, "_");
+    let picUrl = `https://en.wikipedia.org/wiki/Trae_Young#/media/File:${picName}`
+    //player's team
+    let teamInd = data.indexOf("team = ");
+    let teamStart = teamInd + 7;
+    let teamEnd = data.indexOf("|", teamStart);
+    let teamName = data.substring(teamStart, teamEnd);
+    //position
+    let posInd = data.indexOf("position = ");
+    let posStart = posInd + 11;
+    let posEnd = data.indexOf("|", posStart);
+    let posName = data.substring(posStart+2, posEnd-3);
+    //birthday
+    let bdInd = data.indexOf("born ");
+    let bdStart = bdInd + 5;
+    let bdEnd = data.indexOf(")", bdStart);
+    let bdName = data.substring(bdStart, bdEnd);
+    //return an object with all data
+    let playerObj = {
+        name: playerName,
+        picture: picUrl,
+        team: teamName,
+        position: posName,
+        birthday: bdName,
+    }
+    return playerObj
+}
 
 function findBirthday(data) {
     //takes data from wiki api and parses it to find the (unformatted) birthdate
@@ -145,32 +183,32 @@ function whatsYourSign(month, day) {
 
 function addDate (object) {
     const horoDate = document.getElementById('date');
-    horoDate.innerHTML = object;
+    horoDate.innerHTML = `Horoscope Date: ${object}`;
 }
 
 function addHoroscope(object) {
     const horo = document.getElementById('horoscope');
-    horo.innerHTML = object;
+    horo.innerHTML = `Horoscope: ${object}`;
 }
 
 function addIntensity(object) {
     const intensityNumber = document.getElementById('intensity');
-    intensityNumber.innerHTML = object;
+    intensityNumber.innerHTML = `Intensity: ${object}`;
 }
 
 function addKeywords(object) {
     const horoKeywords = document.getElementById('keywords');
-    horoKeywords.innerHTML = `Keywords are: ${object}`;
+    horoKeywords.innerHTML = `Keywords: ${object}`;
 }
 
 function addMood(object) {
     const horoMood = document.getElementById('mood');
-    horoMood.innerHTML = object;
+    horoMood.innerHTML = `Mood: ${object}`;
 }
 
 function addSunsign(object) {
     const horoSunsign = document.getElementById('sunsign');
-    horoSunsign.innerHTML = object;
+    horoSunsign.innerHTML = `Sign: ${object}`;
 }
 
 // console.log("input sun sign " + inputSunSign);
@@ -180,6 +218,7 @@ function getPlayerSign(){
     let wikiUrl = takeInput();
     getWiki(wikiUrl)
     .then((data) => {
+        getPlayerData(data);
         var birthday = findBirthday(data);
         var parsedBirthday = parseBirthday(birthday);
         var playerSign = whatsYourSign(parsedBirthday[0], parsedBirthday[1]);
