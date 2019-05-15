@@ -1,9 +1,6 @@
 function takeInput(){
-    let playerName = document.getElementById('search');
-    // let playerName = "prompt("Enter an NBA player's name")";
-    playerName = playerName.trim();
+    let playerName = node.value;
     playerName = playerName.replace(" ", "_");
-    console.log(`player: ${playerName}`);
     return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
 }
 
