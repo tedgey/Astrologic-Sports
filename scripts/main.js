@@ -1,42 +1,11 @@
 function takeInput(){
-    let playerName = 'Trae Young';
+    let playerName = document.getElementById('search');
     // let playerName = "prompt("Enter an NBA player's name")";
-    // playerName = playerName.trim();
-    // playerName = playerName.replace(" ", "_");
+    playerName = playerName.trim();
+    playerName = playerName.replace(" ", "_");
     console.log(`player: ${playerName}`);
     return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
 }
-
-const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-
-function getWiki(url) {
-    return fetch(proxyUrl + url)
-    .then(function(response) {
-        return response.text();
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
-// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
-
-function get(url) {
-    return fetch(proxyUrl + url)
-    .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        return data;
-    })
-    .catch(function(error) {
-        return error;
-    });
-}
-
 
 function getPlayerData(data) {
     //player name
@@ -77,15 +46,7 @@ function getPlayerData(data) {
     return playerObj
 }
 
-function findBirthday(data) {
-    //takes data from wiki api and parses it to find the (unformatted) birthdate
-    birthdayInd = data.indexOf("and age|");
-    let bdayBegin = birthdayInd+13
-    let bdayEnd = birthdayInd+18
-    birthday = data.substring(bdayBegin, bdayEnd);
-    return birthday
-}
-
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
 function getWiki(url) {
     return fetch(proxyUrl + url)
@@ -222,9 +183,6 @@ function whatsYourSign(month, day) {
         }
 }
 
-// console.log("input sun sign " + inputSunSign);
-// let inputSunSign = (whatsYourSign(1,1));
-
 function addDate (object) {
     const horoDate = document.getElementById('date');
     horoDate.innerHTML = `Horoscope Date: ${object}`;
@@ -255,14 +213,10 @@ function addSunsign(object) {
     horoSunsign.innerHTML = `Sign: ${object}`;
 };
 
-// console.log("input sun sign " + inputSunSign);
-// let inputSunSign = (whatsYourSign(1,1));
-
 function getPlayerSign(){
     let wikiUrl = takeInput();
     let loader = document.getElementById('loader');
         loader.style.display = 'block';
-        console.log("this is loader" + loader.style.display)
     getWiki(wikiUrl)
     .then((data) => {
         getPlayerData(data);
