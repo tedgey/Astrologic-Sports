@@ -49,10 +49,13 @@ h1 {
 }
 
 .wrapper {
-    display: block;
     margin: 1rem auto 0;
     max-width: 1024px;
     width: 100%;
+}
+
+ul {
+    list-style-type: none;
 }
 
 button {
