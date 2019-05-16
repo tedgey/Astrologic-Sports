@@ -21,7 +21,7 @@
         <img src="pictures/purpspace.jpg" id="purpspace">
     </div>
     <div class="search">
-        <input type="search" id="search" class="searchTerm" placeholder="Search for a player"></input>
+        <input type="text" id="search" class="searchTerm" placeholder="Search for a player"></input>
     </div>
     <div class="wrapper">
 
@@ -43,7 +43,12 @@
     <script src="./scripts/wiki.js"></script>
     <script src="./scripts/main.js"></script>
     <script>
-        getPlayerSign();
+    const node = document.getElementById("search");
+    node.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            getPlayerSign();
+        }
+    });
     </script>
 </body>
 <footer class="footer--main">

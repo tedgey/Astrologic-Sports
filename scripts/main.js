@@ -1,4 +1,8 @@
-
+function takeInput(){
+    let playerName = node.value;
+    playerName = playerName.replace(" ", "_");
+    return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
+}
 // var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
 
 function get(url) {
