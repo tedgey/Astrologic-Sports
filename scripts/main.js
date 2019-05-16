@@ -1,7 +1,7 @@
 function takeInput(){
     let playerName = node.value;
     playerName = playerName.replace(" ", "_");
-    return `http://en.wikipedia.org/w/api.php?action=parse&page=${playerName}&format=xml&prop=wikitext`
+    return `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`
 }
 // var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
 
@@ -137,9 +137,10 @@ function getPlayerSign(){
         loader.style.display = 'block';
     getWiki(wikiUrl)
     .then((data) => {
+        // console.log(data);
         var birthday = findBirthday(data);
         var playerSign = whatsYourSign(birthday[0], birthday[1]);
-        console.log(`player's sign: ${playerSign}`);
+        // console.log(`player's sign: ${playerSign}`);
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
         get(apiUrl)
         .then((response) => {
