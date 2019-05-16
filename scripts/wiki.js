@@ -1,12 +1,3 @@
-function takeInput(){ 
-    // let playerName = document.getElementById('search');
-    let playerName = prompt("Enter an NBA player's name");
-    playerName = playerName.trim();
-    playerName = playerName.replace(" ", "%20");
-    console.log(`player: ${playerName}`);
-    return `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`
-}
-
 const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 
 function getWiki(url) {
@@ -23,6 +14,7 @@ function getWiki(url) {
 }
 
 function findBirthday(data) {
+    console.log(data);
     //takes data from wiki api and parses it to find the (unformatted) birthdate
     let birthdayStartInd = data.indexOf("born ") + 5;
     let birthdayEndInd = data.indexOf(")", birthdayStartInd);
