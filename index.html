@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <title>Astrologic</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/profile-card.css">
     <link rel='icon' href='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/198/crescent-moon_1f319.png' type='image/x-icon'/ >
 </head>
 <body>
@@ -20,20 +21,29 @@
     </div>
     
     <div class="wrapper" id="wrapper" style="display:none">
-
-        <h2>Horoscope Test</h2>
-        <ul id="Horoscrope-details">
-                <div class="loader" id="loader" style="display:none">
-                        <div class="dot1"></div>
-                        <div class="dot2"></div>
-                </div>
-            <li id='date'>&nbsp;</li>
-            <li id='horoscope'>&nbsp;</li>
-            <li id='intensity'>&nbsp;</li>
-            <li id='keywords'>&nbsp;</li>
-            <li id='mood'>&nbsp;</li>
-            <li id='sunsign'>&nbsp;</li>
-        </ul>
+        <aside class="profile-card">
+            <header>
+            <!-- here’s the avatar -->
+            <a target="_blank" href="#">
+                <img src="http://lorempixel.com/150/150/people/" class="hoverZoomLink">
+            </a>
+        <h1 id='name'></h1>
+        <h2 id='sunsign'></h2>
+        <h2 id='keywords'></h2>
+        <h2 id='mood'></h2>
+                </header>
+            <div class="profile-bio">
+        <p id='horoscope'>
+            <div class="loader" id="loader" style="display:none">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+        </div>
+        </p>
+        <br>
+        <h2 id='intensity'></h2>
+        <h2 id='date'></h2>
+            </div>
+        </aside>
     </div>    
     <script src="./scripts/moment.js"></script>
     <script src="./scripts/wiki.js"></script>

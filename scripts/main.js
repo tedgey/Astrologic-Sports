@@ -1,5 +1,7 @@
 function takeInput(){
     let playerName = node.value;
+    let displayName = document.getElementById('name');
+    displayName.innerHTML = `${playerName}'s Horoscope`;
     playerName = playerName.replace(" ", "_");
     wrapper.style.display = 'block';
     return `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`
@@ -104,7 +106,7 @@ function whatsYourSign(month, day) {
 
 function addDate (object) {
     const horoDate = document.getElementById('date');
-    horoDate.innerHTML = `Horoscope Date: ${object}`;
+    horoDate.innerHTML = `Date of Horoscope: ${object}`;
 };
 
 function addHoroscope(object) {
@@ -114,12 +116,12 @@ function addHoroscope(object) {
 
 function addIntensity(object) {
     const intensityNumber = document.getElementById('intensity');
-    intensityNumber.innerHTML = `Intensity: ${object}`;
+    intensityNumber.innerHTML = `Intensity Rating: ${object}`;
 };
 
 function addKeywords(object) {
     const horoKeywords = document.getElementById('keywords');
-    horoKeywords.innerHTML = `Keywords: ${object}`;
+    horoKeywords.innerHTML = `Keywords for the day: ${object}`;
 };
 
 function addMood(object) {
@@ -129,7 +131,7 @@ function addMood(object) {
 
 function addSunsign(object) {
     const horoSunsign = document.getElementById('sunsign');
-    horoSunsign.innerHTML = `Sign: ${object}`;
+    horoSunsign.innerHTML = `${object}`;
 };
 
 function getPlayerSign(){
