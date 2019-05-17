@@ -9,7 +9,6 @@ function takeInput(){
 }
 
 function titleCase(name) {
-    name = name.toLowerCase();
     name = name.split(" ");
     for (var i = 0; i < name.length; i++) {
     name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1); 
@@ -204,8 +203,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
-            addSunsignPicture(playerSign);
-            addPlayerImage(playerName, 150);
+            addPlayerImage(playerName, 400);
             loader.style.display = 'none';
         })
     })

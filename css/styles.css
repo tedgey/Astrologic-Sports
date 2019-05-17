@@ -133,14 +133,14 @@ button {
     display: inline-block;
     position: absolute;
     top: 50%;
-    background-color: whitesmoke;
+    background-color: black;
     border-radius: 100%;
     -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
     animation: sk-bounce 2.0s infinite ease-in-out;
 }
 
 .dot2 {
-    top: auto;
+    top: 50%;
     bottom: 0;
     -webkit-animation-delay: -1.0s;
     animation-delay: -1.0s;
