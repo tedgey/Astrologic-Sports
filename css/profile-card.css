@@ -66,7 +66,7 @@
 }
 
 .profile-card header a:after {
-    background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/pisces_2653.png');
+    background-image: 
     background-size: cover;
     position: absolute;
     content: "";

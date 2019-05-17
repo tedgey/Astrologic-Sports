@@ -163,3 +163,8 @@ button {
     -webkit-transform: scale(1.0);
     }
 }
+
+#zodPic {
+    width: 3rem;
+    height: 3rem;
+}
