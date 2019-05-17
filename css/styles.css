@@ -24,15 +24,15 @@ body {
     width: 100%;
 }
 
-p {margin-bottom: 1.25em;}
+/* p {margin-bottom: 1.25em;} */
 
-h1 {
+.name {
     font-size: 3.052rem;
     font-weight: 600;
     margin: 1.5rem 1rem 0 1rem;
 }
 
-h2 {
+.tagline {
     font-weight: 200;
     margin: 0 1rem 2rem 1rem;
     background: -webkit-linear-gradient(right, #aa6677, #445588);
