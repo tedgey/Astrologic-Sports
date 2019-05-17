@@ -134,6 +134,47 @@ function addSunsign(object) {
     horoSunsign.innerHTML = `${object}`;
 };
 
+function addSunsignPicture(playerSign) {
+    console.log(playerSign);
+    let horoPic = document.getElementById('zodPic').src;
+    if (playerSign === "aquarius") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aquarius_2652.png" 
+    }
+    else if (playerSign === "pisces") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/pisces_2653.png"
+    }
+    else if (playerSign === "aries") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aries_2648.png"
+    }
+    else if (playerSign === "taurus") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/taurus_2649.png"
+    }
+    else if (playerSign === "gemini") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/gemini_264a.png"
+    }
+    else if (playerSign === "cancer") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/cancer_264b.png"
+    }
+    else if (playerSign === "leo") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/leo_264c.png"
+    }
+    else if (playerSign === "virgo") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/virgo_264d.png";
+    }
+    else if (playerSign === "libra") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/libra_264e.png"
+    }
+    else if (playerSign === "scorpio") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/scorpius_264f.png"
+    }
+    else if (playerSign === "sagittarius") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/sagittarius_2650.png"
+    }
+    else if (playerSign === "capricorn") {
+        document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/capricorn_2651.png"
+    }
+};
+
 function getPlayerSign(){
     let wikiUrl = takeInput();
     let loader = document.getElementById('loader');
@@ -143,6 +184,7 @@ function getPlayerSign(){
         // console.log(data);
         var birthday = findBirthday(data);
         var playerSign = whatsYourSign(birthday[0], birthday[1]);
+        var sunImgLink = addSunsignPicture(playerSign)
         // console.log(`player's sign: ${playerSign}`);
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
         get(apiUrl)
