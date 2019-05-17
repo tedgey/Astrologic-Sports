@@ -1,12 +1,21 @@
 function takeInput(){
     let playerName = node.value;
+    playerName = titleCase(playerName);
     let displayName = document.getElementById('name');
     displayName.innerHTML = `${playerName}'s Horoscope`;
     playerName = playerName.replace(" ", "_");
     wrapper.style.display = 'block';
     return `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`
 }
-// var apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
+
+function titleCase(name) {
+    name = name.toLowerCase();
+    name = name.split(" ");
+    for (var i = 0; i < name.length; i++) {
+    name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1); 
+    }
+    return name.join(" ");
+}
 
 function get(url) {
     return fetch(proxyUrl + url)
@@ -181,11 +190,8 @@ function getPlayerSign(){
         loader.style.display = 'block';
     getWiki(wikiUrl)
     .then((data) => {
-        // console.log(data);
         var birthday = findBirthday(data);
         var playerSign = whatsYourSign(birthday[0], birthday[1]);
-        var sunImgLink = addSunsignPicture(playerSign)
-        // console.log(`player's sign: ${playerSign}`);
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
         get(apiUrl)
         .then((response) => {
