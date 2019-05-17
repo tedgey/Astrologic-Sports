@@ -9,13 +9,17 @@ function takeInput(){
 }
 
 function titleCase(name) {
-    name = name.toLowerCase();
     name = name.split(" ");
     for (var i = 0; i < name.length; i++) {
     name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1); 
     }
     return name.join(" ");
 }
+
+var closeProfile = document.getElementById('closeButton');
+closeProfile.addEventListener('click', function() {
+    wrapper.style.display = 'none';
+});
 
 function get(url) {
     return fetch(proxyUrl + url)
