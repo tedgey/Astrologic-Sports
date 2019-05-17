@@ -208,7 +208,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
-            addPlayerImage(playerName, 150);
+            addPlayerImage(playerName, 400);
             addSunsignPicture(playerSign);
             loader.style.display = 'none';
         })
