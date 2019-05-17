@@ -145,7 +145,7 @@ function addSunsign(object) {
 
 function addSunsignPicture(playerSign) {
     console.log(playerSign);
-    let horoPic = document.getElementById('zodPic').src;
+    // let horoPic = document.getElementById('zodPic').src;
     if (playerSign === "aquarius") {
         document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aquarius_2652.png" 
     }
@@ -193,6 +193,8 @@ function getPlayerSign(){
     .then((data) => {
         var birthday = findBirthday(data);
         var playerSign = whatsYourSign(birthday[0], birthday[1]);
+        console.log(`player's sign: ${playerSign}`);
+
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
         get(apiUrl)
         .then((response) => {
@@ -202,6 +204,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
+            addSunsignPicture(playerSign);
             addPlayerImage(playerName, 150);
             loader.style.display = 'none';
         })
