@@ -148,8 +148,7 @@ function addSunsign(object) {
 };
 
 function addSunsignPicture(playerSign) {
-    console.log(playerSign);
-    // let horoPic = document.getElementById('zodPic').src;
+    // console.log(playerSign);
     if (playerSign === "aquarius") {
         document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aquarius_2652.png" 
     }
@@ -208,8 +207,8 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
-            // addSunsignPicture(playerSign);
             addPlayerImage(playerName, 150);
+            addSunsignPicture(playerSign);
             loader.style.display = 'none';
         })
     })
