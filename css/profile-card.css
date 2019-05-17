@@ -38,6 +38,18 @@
     animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
+#closeButton {
+    position: absolute;
+    right: .5rem;
+    top: .2rem;
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+}
+#close:hover {
+    opacity: 1;
+}
+
 .profile-card header {
     width: 179px;
     height: 280px;
@@ -456,5 +468,79 @@ padding: 0px 100%;
         background: #FFFFFF;
         border-radius: 4px;
     }
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .profile-card {
+    overflow: scroll;
+    }
+
+    .profile-card header {
+    width: auto;
+    height: auto;
+    padding: 30px 20px;
+    display: block;
+    float: none;
+    border-right: none;
+    }
+    .profile-card .profile-bio {
+    width: auto;
+    height: auto;
+    padding: 15px 20px 30px 20px;
+    display: block;
+    float: none;
+    border: 5px red;
+
+    }
+    .profile-social-links {
+    width: 100%;
+    display: none;
+    float: none;
+    }
+    @-webkit-keyframes materia {
+    0% {
+        background: #E0E0E0;
+    }
+    50% {
+        -webkit-border-radius: 4px;
+    }
+    100% {
+        width: 17.5rem;
+        height: 30rem;
+        background: #FFFFFF;
+        -webkit-border-radius: 4px;
+    }
+    }
+    @keyframes materia {
+    0% {
+        background: #E0E0E0;
+    }
+    50% {
+        border-radius: 4px;
+    }
+    100% {
+        width: 17.5rem;
+        height: 30rem;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+    }
+
+    .footer--main {
+        bottom: 0;
+        color: #445588;
+        display: flex;
+        font-family: Arial, Helvetica, sans-serif;
+        height: 3rem;
+        justify-content: center;
+        margin: .5rem auto 0;
+        position: absolute;
+        width: 100%;
+        background: -webkit-linear-gradient(right, #aa6677, #445588);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }
