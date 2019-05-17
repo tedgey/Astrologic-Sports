@@ -5,7 +5,7 @@ function takeInput(){
     displayName.innerHTML = `${playerName}'s Horoscope`;
     playerName = playerName.replace(" ", "_");
     wrapper.style.display = 'block';
-    return `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`
+    return playerName;
 }
 
 function titleCase(name) {
@@ -185,9 +185,10 @@ function addSunsignPicture(playerSign) {
 };
 
 function getPlayerSign(){
-    let wikiUrl = takeInput();
+    let playerName = takeInput();
+    let wikiUrl = `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`;
     let loader = document.getElementById('loader');
-        loader.style.display = 'block';
+    loader.style.display = 'block';
     getWiki(wikiUrl)
     .then((data) => {
         var birthday = findBirthday(data);
@@ -201,6 +202,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
+            addPlayerImage(playerName, 150);
             loader.style.display = 'none';
         })
     })
