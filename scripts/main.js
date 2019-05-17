@@ -113,6 +113,7 @@ function whatsYourSign(month, day) {
         }
     else {
         window.alert("Player not found, please try again");
+        wrapper.style.display = 'none';
         throw ''
         }
 }

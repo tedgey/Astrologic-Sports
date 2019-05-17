@@ -472,7 +472,7 @@ padding: 0px 100%;
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 750px) {
 
     .profile-card {
     overflow: scroll;
