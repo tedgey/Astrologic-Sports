@@ -9,13 +9,17 @@ function takeInput(){
 }
 
 function titleCase(name) {
-    name = name.toLowerCase();
     name = name.split(" ");
     for (var i = 0; i < name.length; i++) {
     name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1); 
     }
     return name.join(" ");
 }
+
+var closeProfile = document.getElementById('closeButton');
+closeProfile.addEventListener('click', function() {
+    wrapper.style.display = 'none';
+});
 
 function get(url) {
     return fetch(proxyUrl + url)
@@ -109,6 +113,7 @@ function whatsYourSign(month, day) {
         }
     else {
         window.alert("Player not found, please try again");
+        wrapper.style.display = 'none';
         throw ''
         }
 }
@@ -203,7 +208,7 @@ function getPlayerSign(){
             addSunsign(response.sunsign);
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
-            addPlayerImage(playerName, 150);
+            addPlayerImage(playerName, 400);
             addSunsignPicture(playerSign);
             loader.style.display = 'none';
         })
