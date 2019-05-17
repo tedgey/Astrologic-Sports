@@ -12,7 +12,7 @@
 }
 
 .profile-card p {
-    margin: 0px;
+    margin: 1rem;
 }
 .profile-card {
     background: #FFB300;
@@ -43,18 +43,22 @@
     display: inline-block;
     float: left;
     border-right: 2px dashed #EEEEEE;
-    background: grey;
-    color: #000000;
+    /* background: grey; */
+    /* color: #000000; */
     margin-top: 50px;
     opacity: 0;
     text-align: center;
     -webkit-animation: moveIn 1s 3.1s ease forwards;
     animation: moveIn 1s 3.1s ease forwards;
+    padding: 0;
+    background: rgba(0,0,0, .75) ;
+    color: rgb(117, 117, 117);
 }
 
 .profile-card header h1 {
-    color: #FF5722;
-}
+    background: -webkit-linear-gradient(right, #aa6677, #445588);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;}
 
 .profile-card header a {
     display: inline-block;
@@ -88,7 +92,7 @@
     /* width: 120px; */
     /* max-height: 80%; */
     max-width: 100%;
-    max-height: 100%;
+    max-height:
     -webkit-transition: -webkit-box-shadow 0.3s ease;
     transition: box-shadow 0.3s ease;
     -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06);
@@ -411,57 +415,6 @@ padding: 0px 100%;
         top: 50%;
         width: 100%;
         padding-bottom: 100%;
-    }
-    }
-}
-
-@media screen and (min-height: 480px) {
-    .profile-card header {
-    width: 45rem;
-    height: 25rem;
-    /* padding: 30px 20px; */
-    display: flex;
-    float: none;
-    border-right: none;
-    }
-    .profile-card .profile-bio {
-    width: auto;
-    height: auto;
-    padding: 15px 20px 30px 20px;
-    display: block;
-    float: none;
-    }
-    .profile-social-links {
-    width: 100%;
-    display: block;
-    float: none;
-    }
-    @-webkit-keyframes materia {
-    0% {
-        background: #E0E0E0;
-    }
-    50% {
-        -webkit-border-radius: 4px;
-    }
-    100% {
-        width: 680px;
-        height: 600px;
-        background: #FFFFFF;
-        -webkit-border-radius: 4px;
-    }
-    }
-    @keyframes materia {
-    0% {
-        background: #E0E0E0;
-    }
-    50% {
-        border-radius: 4px;
-    }
-    100% {
-        width: 680px;
-        height: auto;
-        background: grey;
-        border-radius: 4px;
     }
     }
 }
