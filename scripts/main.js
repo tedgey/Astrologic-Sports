@@ -16,6 +16,11 @@ function titleCase(name) {
     return name.join(" ");
 }
 
+var closeProfile = document.getElementById('closeButton');
+closeProfile.addEventListener('click', function() {
+    wrapper.style.display = 'none';
+});
+
 function get(url) {
     return fetch(proxyUrl + url)
     .then(function(response) {
@@ -108,6 +113,7 @@ function whatsYourSign(month, day) {
         }
     else {
         window.alert("Player not found, please try again");
+        wrapper.style.display = 'none';
         throw ''
         }
 }
@@ -143,8 +149,7 @@ function addSunsign(object) {
 };
 
 function addSunsignPicture(playerSign) {
-    console.log(playerSign);
-    // let horoPic = document.getElementById('zodPic').src;
+    // console.log(playerSign);
     if (playerSign === "aquarius") {
         document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aquarius_2652.png" 
     }
@@ -204,6 +209,7 @@ function getPlayerSign(){
             addMood(response.meta.mood);
             addKeywords(response.meta.keywords);
             addPlayerImage(playerName, 400);
+            addSunsignPicture(playerSign);
             loader.style.display = 'none';
         })
     })
