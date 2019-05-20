@@ -524,6 +524,10 @@ padding: 0px 100%;
         left: 30%;
     }
 
+    #zodPic {
+        display: none;
+    }
+
     .profile-social-links {
     width: 100%;
     display: none;
