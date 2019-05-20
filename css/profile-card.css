@@ -535,7 +535,7 @@ padding: 0px 100%;
     100% {
         width: 17.5rem;
         height: 30rem;
-        background: #FFFFFF;
+        background: rgba(0,0,0, .75);
         -webkit-border-radius: 4px;
     }
     }
@@ -549,7 +549,7 @@ padding: 0px 100%;
     100% {
         width: 17.5rem;
         height: 30rem;
-        background: #FFFFFF;
+        background: rgba(0,0,0, .75);
         border-radius: 4px;
     }
     }
