@@ -483,7 +483,6 @@ padding: 0px 100%;
         background: grey;
         border-radius: 4px;
         background: rgba(0,0,0, .75) ;
-        border: none;
         color: rgb(117, 117, 117);
     }
     }
@@ -510,9 +509,17 @@ padding: 0px 100%;
     padding: 15px 20px 30px 20px;
     display: block;
     float: none;
-    border: 5px red;
 
     }
+    .info--container {
+        position: inherit;
+        text-align: center;
+    }
+
+    .playerPic {
+        left: 30%;
+    }
+
     .profile-social-links {
     width: 100%;
     display: none;
@@ -528,7 +535,7 @@ padding: 0px 100%;
     100% {
         width: 17.5rem;
         height: 30rem;
-        background: #FFFFFF;
+        background: rgba(0,0,0, .75);
         -webkit-border-radius: 4px;
     }
     }
@@ -542,7 +549,7 @@ padding: 0px 100%;
     100% {
         width: 17.5rem;
         height: 30rem;
-        background: #FFFFFF;
+        background: rgba(0,0,0, .75);
         border-radius: 4px;
     }
     }
