@@ -26,6 +26,7 @@
     overflow: hidden;
     opacity: 0;
     margin-top: 70px;
+    overflow: scroll;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     -webkit-border-radius: 50%;
