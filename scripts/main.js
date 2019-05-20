@@ -135,12 +135,14 @@ function addIntensity(object) {
 
 function addKeywords(object) {
     const horoKeywords = document.getElementById('keywords');
-    horoKeywords.innerHTML = `Keywords for the day: ${object}`;
+    let capitalKeywords = titleCase(object);
+    horoKeywords.innerHTML = `Keywords:  "${capitalKeywords}"`;
 };
 
 function addMood(object) {
     const horoMood = document.getElementById('mood');
-    horoMood.innerHTML = `Mood: ${object}`;
+    let capitalMood = titleCase(object);
+    horoMood.innerHTML = `Tomorrow's Mood: "${capitalMood}"`;
 };
 
 function addSunsign(object) {
