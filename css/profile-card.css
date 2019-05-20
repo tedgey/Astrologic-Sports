@@ -44,6 +44,9 @@
     width: 20px;
     height: 20px;
     opacity: 0.3;
+    cursor: pointer;
+    color: whitesmoke;
+    font-size: 2rem;
 }
 #close:hover {
     opacity: 1;
