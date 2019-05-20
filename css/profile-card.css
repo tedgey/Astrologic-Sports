@@ -26,6 +26,7 @@
     overflow: hidden;
     opacity: 0;
     margin-top: 70px;
+    overflow: scroll;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     -webkit-border-radius: 50%;
@@ -43,6 +44,9 @@
     width: 20px;
     height: 20px;
     opacity: 0.3;
+    cursor: pointer;
+    color: whitesmoke;
+    font-size: 2rem;
 }
 #close:hover {
     opacity: 1;
