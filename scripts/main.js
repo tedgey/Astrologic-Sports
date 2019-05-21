@@ -1,4 +1,5 @@
 function takeInput(){
+    // take the user's input, format it and return the value
     let playerName = node.value;
     playerName = titleCase(playerName);
     let displayName = document.getElementById('name');
@@ -9,6 +10,7 @@ function takeInput(){
 }
 
 function titleCase(name) {
+    // take a string and ensure the first letter of each word is capitalized
     name = name.split(" ");
     for (var i = 0; i < name.length; i++) {
     name[i] = name[i].charAt(0).toUpperCase() + name[i].slice(1); 
@@ -22,6 +24,7 @@ closeProfile.addEventListener('click', function() {
 });
 
 function get(url) {
+    // fetch the horoscope data from a url, using a proxy to get around CORS
     return fetch(proxyUrl + url)
     .then(function(response) {
         return response.json()
@@ -119,39 +122,45 @@ function whatsYourSign(month, day) {
 }
 
 function addDate (object) {
+    // add the horoscope date info to info card
     const horoDate = document.getElementById('date');
     horoDate.innerHTML = `Date of Horoscope: ${object}`;
 };
 
 function addHoroscope(object) {
+    // add horoscope info to info card
     const horo = document.getElementById('horoscope');
     horo.innerHTML = `Horoscope: ${object}`;
 };
 
 function addIntensity(object) {
+    // add horoscope intensity level to info card
     const intensityNumber = document.getElementById('intensity');
     intensityNumber.innerHTML = `Intensity Rating: ${object}`;
 };
 
 function addKeywords(object) {
+    // add horoscope keywords to info card
     const horoKeywords = document.getElementById('keywords');
     let capitalKeywords = titleCase(object);
     horoKeywords.innerHTML = `Keywords:  "${capitalKeywords}"`;
 };
 
 function addMood(object) {
+    // add mood to info card
     const horoMood = document.getElementById('mood');
     let capitalMood = titleCase(object);
     horoMood.innerHTML = `Tomorrow's Mood: "${capitalMood}"`;
 };
 
 function addSunsign(object) {
+    // add the person's zodiac sign to the info card
     const horoSunsign = document.getElementById('sunsign');
     horoSunsign.innerHTML = `${object}`;
 };
 
 function addSunsignPicture(playerSign) {
-    // console.log(playerSign);
+    // based on the players sign, add the emoji for that sign to the info card
     if (playerSign === "aquarius") {
         document.getElementById('zodPic').src = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/aquarius_2652.png" 
     }
@@ -191,6 +200,7 @@ function addSunsignPicture(playerSign) {
 };
 
 function getPlayerSign(){
+    // main function that takes the user's input, queries wikipedia for data, finds the player's zodiac sign, gets the horoscope data and presents it to the user
     let playerName = takeInput();
     let wikiUrl = `https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=${playerName}`;
     let loader = document.getElementById('loader');
@@ -199,8 +209,6 @@ function getPlayerSign(){
     .then((data) => {
         var birthday = findBirthday(data);
         var playerSign = whatsYourSign(birthday[0], birthday[1]);
-        console.log(`player's sign: ${playerSign}`);
-
         let apiUrl = `https://theastrologer-api.herokuapp.com/api/horoscope/${playerSign}/tomorrow`;
         get(apiUrl)
         .then((response) => {
