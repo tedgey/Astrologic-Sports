@@ -87,23 +87,6 @@
     align-items: center;
 }
 
-/* .profile-card header a:after {
-    background-image: url('https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/pisces_2653.png');
-    background-size: cover;
-    position: absolute;
-    content: "";
-    bottom: 3px;
-    right: 3px;
-    width: 20px;
-    height: 20px;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-    -webkit-animation: scaleIn 0.3s 3.5s ease forwards;
-    animation: scaleIn 0.3s 3.5s ease forwards;
-} */
-
 .profile-card header a > img {
     float: left;
     /* width: 120px; */
@@ -124,11 +107,6 @@
     height: auto;
 }
 
-/* .profile-card header a:hover > img {
-    -webkit-box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
-    box-shadow: 0px 0px 0px 12px rgba(0, 0, 0, 0.1);
-} */
-
 .profile-card .profile-bio {
     width: 680px;
     height: 180px;
@@ -143,53 +121,6 @@
     -webkit-animation: moveIn 1s 3.1s ease forwards;
     animation: moveIn 1s 3.1s ease forwards;
 }
-
-/* .profile-social-links {
-    width: 218px;
-    display: inline-block;
-    float: right;
-    margin: 0px;
-    padding: 15px 20px;
-    background: #FFFFFF;
-    margin-top: 50px;
-    text-align: center;
-    opacity: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-animation: moveIn 1s 3.1s ease forwards;
-    animation: moveIn 1s 3.1s ease forwards;
-}
-
-.profile-social-links li {
-    list-style: none;
-    margin: -5px 0px 0px 0px;
-    padding: 0px;
-    float: left;
-    width: 25%;
-    text-align: center;
-}
-
-.profile-social-links li a {
-    display: inline-block;
-    color: red;
-    width: 24px;
-    height: 24px;
-    padding: 6px;
-    position: relative;
-    overflow: hidden!important;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-}
-
-.profile-social-links li a i {
-    position: relative;
-    z-index: 1;
-}
-
-.profile-social-links li a img,
-.profile-social-links li a svg {
-    width: 24px;
-} */
 
 @-webkit-keyframes init {
     0% {
@@ -436,6 +367,8 @@ padding: 0px 100%;
     }
 }
 
+/* For small sized screens: */
+
 @media screen and (min-height: 480px) {
     .profile-card header {
     width: 45rem;
@@ -492,6 +425,7 @@ padding: 0px 100%;
     }
 }
 
+/* Medium sized screens: */
 
 @media screen and (max-width: 750px) {
 
