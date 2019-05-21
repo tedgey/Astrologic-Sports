@@ -32,5 +32,7 @@ ________________________________________________________________________________
   * [Jack Maddox](https://github.com/jackdmaddox/Astrologic-Fantasy-Sports)
 
 
+______________________________________________________________________________________________________
 
+**Thank you for reading, have a good horoscope!**
 
